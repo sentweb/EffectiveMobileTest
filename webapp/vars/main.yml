@@ -1,0 +1,3 @@
+---
+nginx_conf_template: "templates/nginx.conf.j2"
+deploy_directory: "/opt/webapp"

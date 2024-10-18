@@ -1,0 +1,5 @@
+---
+- name: Reload nginx
+  ansible.builtin.docker_container:
+    name: nginx
+    state: restarted

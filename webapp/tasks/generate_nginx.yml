@@ -1,0 +1,15 @@
+---
+- name: Nginx directory exists
+  ansible.builtin.file:
+    path: "{{ deploy_directory }}/nginx"
+    state: directory
+    mode: '0755'
+
+- name: Generate nginx config
+  ansible.builtin.template:
+    src: "nginx.conf.j2"
+    dest: "{{ deploy_directory }}/nginx/nginx.conf"
+    mode: '0644'
+  notify:
+    - Reload nginx
+

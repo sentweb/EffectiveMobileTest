@@ -1,0 +1,13 @@
+---
+- name: Directory exists
+  ansible.builtin.file:
+    path: "{{ deploy_directory }}"
+    state: directory
+    mode: '0755'
+
+- name: Copy Docker Compose file
+  ansible.builtin.copy:
+    src: files/docker-compose.yml 
+    dest: "{{ deploy_directory }}/docker-compose.yml"
+    mode: '0644'
+

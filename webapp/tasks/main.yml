@@ -1,0 +1,24 @@
+---
+- include_tasks: install_docker.yml
+- include_tasks: copy_compose.yml
+- include_tasks: generate_nginx.yml
+- name: Create necessary directories
+  ansible.builtin.file:
+    path: "{{ deploy_directory }}/nginx"
+    state: directory
+    mode: '0755'
+- name: Create php directory
+  ansible.builtin.file:
+    path: "{{ deploy_directory }}/php"
+    state: directory
+    mode: '0755'
+- name: Copy php Dockerfile
+  ansible.builtin.copy:
+    src: php/Dockerfile
+    dest: "{{ deploy_directory }}/php/Dockerfile"
+    mode: '0644'
+- name: Start application with Docker Compose
+  ansible.builtin.command:
+    cmd: docker-compose up -d
+    chdir: "{{ deploy_directory }}"
+
